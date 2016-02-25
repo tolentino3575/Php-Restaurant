@@ -87,6 +87,36 @@
         //Assert
         $this->assertEquals($test_Restaurant, $result);
       }
+      
+        function testUpdate()
+      {
+        //Arrange
+        $name = "Pho Shizzle";
+        $id = null;
+        $test_Restaurant = new Restaurant($name, $id);
+        $test_Restaurant->save();
+        $new_name = "Pho Kim";
+        //Act
+        $test_Restaurant->update($new_name);
+        //Asses
+        $this->assertEquals("Pho Kim", $test_Restaurant->getName());
+      }
+      function testDelete()
+      {
+        //Arrange
+        $name = "Pho Shizzle";
+        $id = null;
+        $test_Restaurant = new Restaurant($name, $id);
+        $test_Restaurant->save();
+
+        $name2 = "Pho Kim";
+        $test_Restaurant2 = new Restaurant($name2, $id);
+        $test_Restaurant2->save();
+        //Act
+        $test_Restaurant->delete();
+        //Assert
+        $this->assertEquals([$test_Restaurant2], Restaurant::getAll());
+      }
 
   }
 
